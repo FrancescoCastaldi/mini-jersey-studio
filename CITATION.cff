@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this software in your research, design, or manufacturing workflows, please cite it as below."
+title: "MiniJersey 3D Studio: Real-Time Client-Side Cycling Jersey Customization & Dynamic Planar WebGL Renderer"
+version: 1.0.0
+date-released: 2026-08-15
+url: "https://francescocastaldi.github.io/mini-jersey-studio/"
+repository-code: "https://github.com/FrancescoCastaldi/mini-jersey-studio"
+license: MIT
+authors:
+  - family-names: Castaldi
+    given-names: Francesco
+keywords:
+  - threejs
+  - webgl
+  - cycling jersey
+  - garment customization
+  - planar uv projection
+  - svg to canvas
+  - tech pack
+  - client-side web application
+abstract: >-
+  MiniJersey 3D Studio is an open-source, client-side web platform for real-time
+  apparel design and 3D visualization. It combines dynamic SVG vector generation,
+  dual-hemisphere planar UV mapping, interactive 3D WebGL rendering via Three.js,
+  custom GLB/GLTF model ingestion, and production-ready 2D Tech Pack generation.
