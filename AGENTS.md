@@ -62,4 +62,15 @@ Core features include:
 - `js/three_viewer.js`: Complete Three.js logic (Lighting, GLTFLoader, Planar Mapping, Animation Loop).
 
 ---
+
+## 🗺️ Repository Map
+
+A full codemap is available at [`codemap.md`](file:///c:/Users/franc/Documents/mini-jersey-studio/codemap.md) in the project root.
+
+Before working on any task, read `codemap.md` to understand:
+- Project architecture and entry points
+- Directory responsibilities and design patterns
+- Data flow and integration points between modules
+
+---
 *End of context file. Agents reading this should respect the Vanilla JS architecture and the local file:// constraints.*
