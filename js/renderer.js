@@ -66,7 +66,7 @@
       `;
 
       let svg = `
-        <svg id="jersey-svg-root" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${geo.width} ${geo.height}" width="${geo.width}" height="${geo.height}" style="overflow: visible;">
+        <svg id="jersey-svg-root" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${geo.width} ${geo.height}" width="${geo.width}" height="${geo.height}" preserveAspectRatio="${isMini ? 'xMidYMid meet' : 'none'}" style="overflow: visible;">
           <defs>
             ${defs}
           </defs>

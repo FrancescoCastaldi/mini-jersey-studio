@@ -36,6 +36,15 @@
       this.shirtTexture.encoding = THREE.sRGBEncoding;
       this.shirtTexture.flipY = true;
 
+      this.isBaking = false;
+
+      // Subscribe to reactive state updates for immediate 3D texture baking
+      if (this.stateManager) {
+        this.stateManager.subscribe(() => {
+          this.updateTextureMap();
+        });
+      }
+
       this.init();
     }
 
@@ -109,7 +118,16 @@
           this.shirtModel = builder.build(this.shirtTexture);
           this.scene.add(this.shirtModel);
 
+          this.shirtModel.updateMatrixWorld(true);
           const scaledBox = new THREE.Box3().setFromObject(this.shirtModel);
+
+          // Apply Planar Mapping to all children
+          this.shirtModel.traverse((child) => {
+            if (child.isMesh && child.name !== 'FrontZipper_Assembly') {
+              this.applyPlanarMapping(child, scaledBox);
+            }
+          });
+
           this.hangerGroup = new THREE.Group();
           this.buildHanger(scaledBox.max.y - 0.05);
           this.scene.add(this.hangerGroup);
@@ -304,6 +322,9 @@
      *  TEXTURE BAKING
      * ================================================================ */
     async updateTextureMap() {
+      if (this.isBaking) return;
+      this.isBaking = true;
+
       try {
         const [renderedFront, renderedBack] = await Promise.all([
           this.renderer2D.renderToCanvas('front', 'flat', 1024, 1024),
@@ -313,16 +334,19 @@
         this.textureCtx.clearRect(0, 0, 2048, 1024);
 
         const state = this.stateManager.getState();
-        this.textureCtx.fillStyle = state.colors.body || '#1e3a5f';
+        const mainColor = (state && state.colors && (state.colors.torso || state.colors.body)) || '#e11d48';
+        this.textureCtx.fillStyle = mainColor;
         this.textureCtx.fillRect(0, 0, 2048, 1024);
 
-        // Draw Front on left half, Back on right half
+        // Draw Front on left half (0..1024), Back on right half (1024..2048)
         this.textureCtx.drawImage(renderedFront, 0, 0, 1024, 1024);
         this.textureCtx.drawImage(renderedBack, 1024, 0, 1024, 1024);
 
         this.shirtTexture.needsUpdate = true;
       } catch (err) {
         console.warn('Texture bake error:', err);
+      } finally {
+        this.isBaking = false;
       }
     }
 
