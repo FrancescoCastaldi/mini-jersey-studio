@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://francescocastaldi.github.io/mini-jersey-studio/sitemap.xml
