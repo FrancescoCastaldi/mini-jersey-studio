@@ -20,9 +20,12 @@ mini-jersey-studio/
 │   ├── app.js                  # Main UI controller & DOM event orchestrator
 │   ├── state.js                # Centralized reactive Pub/Sub state store
 │   ├── renderer.js             # SVG-to-Canvas 2D texture rasterization engine
+│   ├── cycling_model.js        # 3D Pro Cycling Jersey procedural geometry generator
 │   ├── three_viewer.js         # Three.js 3D WebGL engine & dynamic planar UV mapper
 │   ├── techpack.js             # 2D production blueprint & printable PDF export engine
 │   └── model_data.js           # Base64-encoded default 3D model (bypasses browser CORS)
+├── img/
+│   └── velox_logo.jpg          # Ultra-modern minimal cycling brand logo asset
 ├── .github/
 │   ├── workflows/deploy.yml    # Automated GitHub Pages CI/CD pipeline
 │   └── ISSUE_TEMPLATE/         # GitHub issue & PR community health templates
@@ -41,9 +44,10 @@ mini-jersey-studio/
 
 | Module / File | Responsibility | Design Patterns | Key Functions & Exports |
 | :--- | :--- | :--- | :--- |
+| [`js/cycling_model.js`](file:///c:/Users/franc/Documents/mini-jersey-studio/js/cycling_model.js) | Procedural 3D Pro Cycling Jersey engine (aero race-fit torso, raglan sleeves, aero collar, 3D rear cargo pockets, zipper). | **Builder / Factory** | `CyclingJersey3DBuilder`, `build(textureMap)` |
 | [`js/state.js`](file:///c:/Users/franc/Documents/mini-jersey-studio/js/state.js) | Central source of truth for design state (colors, patterns, typography, logos, active camera, undo/redo history). | **Observer / Pub-Sub** | `getState()`, `updateState(key, val)`, `subscribe(fn)`, `undo()`, `redo()` |
 | [`js/renderer.js`](file:///c:/Users/franc/Documents/mini-jersey-studio/js/renderer.js) | Clones flat SVG pattern nodes, applies colors/gradients/logos, and rasterizes onto a 2048x1024 HTML5 `<canvas>`. | **Factory / Builder** | `renderTexture(state)`, `bakeSVGToCanvas(svgElement)`, `getTextureCanvas()` |
-| [`js/three_viewer.js`](file:///c:/Users/franc/Documents/mini-jersey-studio/js/three_viewer.js) | Three.js WebGL scene lifecycle, lighting, camera controls, custom GLB loader, and Dynamic Planar UV coordinate remapping. | **Facade / Viewport Manager** | `initThree()`, `loadModelFromURL(url)`, `applyPlanarUVProjection(mesh)`, `updateTexture(canvas)` |
+| [`js/three_viewer.js`](file:///c:/Users/franc/Documents/mini-jersey-studio/js/three_viewer.js) | Three.js WebGL scene lifecycle, lighting, camera controls, custom GLB loader, and Dynamic Planar UV coordinate remapping. | **Facade / Viewport Manager** | `initThree()`, `loadModelByType(type)`, `loadModelFromURL(url)`, `updateTexture(canvas)` |
 | [`js/techpack.js`](file:///c:/Users/franc/Documents/mini-jersey-studio/js/techpack.js) | Compiles front/back panels, Pantone/HEX palettes, measurements, and sponsor placements into a 2D production spec sheet. | **Report Generator / Exporter** | `generateTechPack(state)`, `downloadTechPackPNG()`, `downloadTechPackPDF()` |
 | [`js/app.js`](file:///c:/Users/franc/Documents/mini-jersey-studio/js/app.js) | Binds all DOM interactions (color pickers, sliders, model upload, camera snaps, preset loader) to state dispatches. | **Mediator / Controller** | `initApp()`, `bindEventListeners()`, `handleModelUpload(file)`, `exportJerseyFile()` |
 | [`js/model_data.js`](file:///c:/Users/franc/Documents/mini-jersey-studio/js/model_data.js) | Embedded Base64 Data URI string of default `shirt.glb` to guarantee zero-CORS offline execution (`file:///`). | **Asset Constant** | `window.SHIRT_GLB` |

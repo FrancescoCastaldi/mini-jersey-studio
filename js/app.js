@@ -1,4 +1,4 @@
-﻿/**
+/**
  * MINIJERSEY 3D STUDIO â€” MAIN APPLICATION CONTROLLER
  */
 
@@ -692,8 +692,21 @@
     });
 
     // -------------------------------------------------------------
-    // CUSTOM 3D MODEL UPLOAD (.GLB / .GLTF)
+    // 3D MODEL SWITCHER & CUSTOM MODEL UPLOAD (.GLB / .GLTF)
     // -------------------------------------------------------------
+    const modelSwitchButtons = document.querySelectorAll('.model-switch-btn');
+    modelSwitchButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        modelSwitchButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const modelType = btn.getAttribute('data-model');
+        if (threeViewer) {
+          threeViewer.loadModelByType(modelType);
+          showToast(modelType === 'pro-jersey' ? "Loaded Pro Aero Cycling Jersey!" : "Loaded Classic T-Shirt!");
+        }
+      });
+    });
+
     const modelUploadInput = document.getElementById('model-upload');
     if (modelUploadInput) {
       modelUploadInput.addEventListener('change', (e) => {
@@ -701,8 +714,9 @@
           const file = e.target.files[0];
           const url = URL.createObjectURL(file);
           if (threeViewer) {
+            modelSwitchButtons.forEach(b => b.classList.remove('active'));
             threeViewer.loadModelFromURL(url);
-            showToast("Custom 3D model loaded!");
+            showToast(`Custom model "${file.name}" loaded!`);
           }
           e.target.value = '';
         }

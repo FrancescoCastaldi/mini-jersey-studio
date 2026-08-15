@@ -50,16 +50,23 @@ Core features include:
   - Handed the blob URL to `threeViewer.loadModelFromURL(url)`.
   - Because of the Dynamic Planar Projection (see point 2), the user can upload *any* standard torso/shirt GLB model, and the app will instantly align the custom jersey graphics onto it perfectly.
 
-### 4. Bounding Box & Scene Alignments
-- **Problem:** Different models have different scales and origins, causing the "hanger" accessory to float or intersect incorrectly.
-- **Solution:** The model is now dynamically centered and scaled to a strict normalized height (`2.8 units`) upon loading. The hanger's Y-position is calculated strictly against the model's normalized `boundingBox.max.y`.
+### 5. High-Fidelity 3D Pro Cycling Jersey Engine (`js/cycling_model.js`)
+- **Problem:** Generic imported t-shirt models lacked cycling-specific attributes (no aero race cut, no mandarin collar, no 3 rear cargo pockets, no front zip relief).
+- **Solution:** Developed a native procedural 3D Cycling Jersey Builder in Three.js (`CyclingJersey3DBuilder`).
+  - **Aerodynamic Race Cut:** Contoured chest, tapered waist, and drop-tail rear hem.
+  - **Raglan Aero Sleeves:** Extended length to mid-bicep with elastic cuffs.
+  - **Aero Mandarin Zip Collar:** Low-profile standing collar with V-throat notch.
+  - **3D Real Triple Cargo Pockets:** 3 physical cargo pocket compartments with volumetric depth and top elastic band on the lower back.
+  - **Front Metallic Zipper Track & Pull Tab:** Physical 3D zipper assembly.
+  - **Integrated Brand Symbol:** VELOX ultra-modern minimal velocity wing logo added to symbol library and branding.
 
 ## 📁 File Structure Reference
-- `index.html`: Main interface and CDN imports (Three.js r128, OrbitControls, GLTFLoader).
-- `css/style.css`: UI styling, CSS Grid/Flexbox layouts, glassmorphism UI.
-- `models/`: Folder originally intended for raw `.glb` files.
-- `js/model_data.js`: Base64 encoded string of the default `shirt.glb`.
-- `js/three_viewer.js`: Complete Three.js logic (Lighting, GLTFLoader, Planar Mapping, Animation Loop).
+- `index.html`: Main interface, CDN imports, glassmorphism toolbar.
+- `css/style.css`: UI styling, responsive layout, dark theme tokens.
+- `js/cycling_model.js`: Procedural 3D Pro Cycling Jersey geometry generator.
+- `js/model_data.js`: Base64 encoded string of classic `shirt.glb`.
+- `js/three_viewer.js`: Complete Three.js logic (Lighting, GLTFLoader, Planar Mapping, Model Switcher).
+- `img/velox_logo.jpg`: Ultra-modern minimalist cycling brand logo.
 
 ---
 

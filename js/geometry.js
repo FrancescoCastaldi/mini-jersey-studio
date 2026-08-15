@@ -121,6 +121,22 @@
 
   // Stock Badges SVG content (for immediate use without uploading files)
   const STOCK_BADGES = {
+    'velox': `
+      <g fill="currentColor">
+        <!-- Velocity Aero Wing V Emblem -->
+        <path d="M12 18.5L18.8 3H15.2L10.8 13.5L7.2 8.2H4.8L9.2 15L12 18.5Z"/>
+        <path d="M1.5 3L10.2 9.5L9.2 11.2L2.8 6.5Z"/>
+        <path d="M3.2 5.8L8.8 11.2L7.8 12.8L4.6 9.5Z"/>
+        <text x="12" y="23" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-weight="800" font-size="3.4" letter-spacing="0.22em" text-anchor="middle" fill="currentColor">VELOX</text>
+      </g>
+    `,
+    'aero-apex': `
+      <g stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2L3 9L12 16L21 9L12 2Z"/>
+        <path d="M6 12.5L12 17.5L18 12.5"/>
+        <path d="M8 16L12 19.5L16 16"/>
+      </g>
+    `,
     'bike': `
       <g stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="18.5" cy="17.5" r="3.5"/>

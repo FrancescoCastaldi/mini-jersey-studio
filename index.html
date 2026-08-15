@@ -13,6 +13,7 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
   <script src="js/model_data.js"></script>
+  <script src="js/cycling_model.js"></script>
 </head>
 <body>
   <div id="app" class="app-layout">
@@ -21,13 +22,15 @@
     <header class="app-header">
       <div class="brand">
         <div class="brand-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/>
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 18.5L18.8 3H15.2L10.8 13.5L7.2 8.2H4.8L9.2 15L12 18.5Z"/>
+            <path d="M1.5 3L10.2 9.5L9.2 11.2L2.8 6.5Z"/>
+            <path d="M3.2 5.8L8.8 11.2L7.8 12.8L4.6 9.5Z"/>
           </svg>
         </div>
         <div class="brand-text">
           <span class="brand-title">MiniJersey 3D Studio</span>
-          <span class="brand-badge">PRO 360° KIT DESIGNER</span>
+          <span class="brand-badge">PRO 360° AERO KIT DESIGNER</span>
         </div>
       </div>
 
@@ -44,10 +47,22 @@
 
         <div class="toolbar-divider"></div>
 
+        <!-- 3D Model Mode Switcher -->
+        <div class="model-select-pill">
+          <button class="model-switch-btn active" data-model="pro-jersey" title="Pro Aero Cycling Jersey (3 Rear Pockets & Race Fit)">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg>
+            <span>Pro Aero Kit</span>
+          </button>
+          <button class="model-switch-btn" data-model="classic-shirt" title="Classic Crewneck T-Shirt">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg>
+            <span>Classic Tee</span>
+          </button>
+        </div>
+
         <!-- Custom Model Upload -->
-        <label for="model-upload" class="tool-btn" style="cursor: pointer; background: #2563eb; color: white; border-color: #3b82f6;">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          <span>Upload 3D Model (.glb)</span>
+        <label for="model-upload" class="tool-btn model-upload-btn" style="cursor: pointer;" title="Upload Custom .GLB / .GLTF Model">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span>Upload GLB</span>
         </label>
         <input type="file" id="model-upload" accept=".glb,.gltf" style="display: none;">
 
@@ -166,6 +181,14 @@
               <p class="section-desc">Select an original 3D livery to apply coordinated colors, patterns, and typography:</p>
               
               <div class="preset-grid">
+                <button class="preset-card" data-preset="velox-aero-minimal">
+                  <div class="preset-swatch" style="background: linear-gradient(135deg, #09090b 40%, #06b6d4 100%);"></div>
+                  <div class="preset-info">
+                    <span class="preset-name">VELOX Aero Minimal</span>
+                    <span class="preset-tag">Ultra Modern Light / Apex</span>
+                  </div>
+                </button>
+
                 <button class="preset-card" data-preset="dolomiti-peak">
                   <div class="preset-swatch" style="background: linear-gradient(135deg, #0f172a, #06b6d4);"></div>
                   <div class="preset-info">
@@ -489,6 +512,14 @@
             <div class="panel-section">
               <h4 class="section-subtitle">Original Cycling Badges & Symbols</h4>
               <div class="stock-logos-grid">
+                <button class="stock-badge-btn" data-stock="velox" title="VELOX Velocity Wing Luxury Minimalist Brand">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 18.5L18.8 3H15.2L10.8 13.5L7.2 8.2H4.8L9.2 15L12 18.5Z"/><path d="M1.5 3L10.2 9.5L9.2 11.2L2.8 6.5Z"/><path d="M3.2 5.8L8.8 11.2L7.8 12.8L4.6 9.5Z"/><text x="12" y="23" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="3.4" letter-spacing="0.22em" text-anchor="middle" fill="currentColor">VELOX</text></svg>
+                  <span>Velox Apex</span>
+                </button>
+                <button class="stock-badge-btn" data-stock="aero-apex" title="Aero Velocity Chevron">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 9L12 16L21 9L12 2Z"/><path d="M6 12.5L12 17.5L18 12.5"/><path d="M8 16L12 19.5L16 16"/></svg>
+                  <span>Aero Chevron</span>
+                </button>
                 <button class="stock-badge-btn" data-stock="bike" title="Road Bike Icon">
                   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg>
                   <span>Road Bike</span>

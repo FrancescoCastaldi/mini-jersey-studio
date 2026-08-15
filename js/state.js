@@ -58,6 +58,26 @@
 
   // 100% Original, Copyright-Checked Pro Presets
   const PRESETS = {
+    'velox-aero-minimal': {
+      name: "VELOX Aero Pro Minimalist",
+      tag: "Ultra Modern Minimal Light",
+      colors: {
+        torso: '#0f172a',
+        collar: '#06b6d4',
+        sleeveLeft: '#1e293b',
+        sleeveRight: '#1e293b',
+        cuffs: '#06b6d4',
+        sidePanels: '#09090b',
+        zipper: '#06b6d4',
+        pockets: '#1e293b',
+        hem: '#06b6d4'
+      },
+      pattern: { type: 'speed-chevrons', secondaryColor: '#06b6d4', tertiaryColor: '#38bdf8', scale: 100 },
+      text: {
+        sponsor: { content: 'VELOX APEX', font: 'Plus Jakarta Sans', color: '#ffffff', size: 36, showFront: true, showBack: true },
+        rider: { name: 'F. CASTALDI', number: '1', color: '#06b6d4', show: true }
+      }
+    },
     'dolomiti-peak': {
       name: "Dolomiti Peak Alpine Pro",
       tag: "Alte Quote & Altimetria",

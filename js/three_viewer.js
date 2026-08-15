@@ -1,4 +1,4 @@
-﻿/**
+/**
  * MINIJERSEY 3D STUDIO â€” GLTF/GLB VIEWER & IMPORTER
  * 
  * Supports loading default and user-uploaded 3D models.
@@ -81,9 +81,9 @@
 
       this.setupLighting();
 
-      // Load Default Model
-      const defaultModelUrl = window.SHIRT_GLB || 'models/shirt.glb';
-      this.loadModelFromURL(defaultModelUrl);
+      // Load Default Model: Pro Aero Cycling Jersey
+      this.currentModelType = 'pro-jersey';
+      this.loadModelByType('pro-jersey');
 
       this.animate = this.animate.bind(this);
       this.animate();
@@ -92,19 +92,57 @@
     }
 
     /* ================================================================
+     *  MODEL SELECTION & LOADING
+     * ================================================================ */
+    loadModelByType(type) {
+      this.currentModelType = type;
+
+      if (this.shirtModel) {
+        this.scene.remove(this.shirtModel);
+        if (this.hangerGroup) this.scene.remove(this.hangerGroup);
+      }
+
+      if (type === 'pro-jersey') {
+        // High-Fidelity Procedural Pro Cycling Jersey Model
+        if (window.CyclingJersey3DBuilder) {
+          const builder = new window.CyclingJersey3DBuilder();
+          this.shirtModel = builder.build(this.shirtTexture);
+          this.scene.add(this.shirtModel);
+
+          const scaledBox = new THREE.Box3().setFromObject(this.shirtModel);
+          this.hangerGroup = new THREE.Group();
+          this.buildHanger(scaledBox.max.y - 0.05);
+          this.scene.add(this.hangerGroup);
+
+          this.updateTextureMap();
+          console.log('3D Pro Cycling Jersey loaded successfully.');
+          return;
+        }
+      }
+
+      // Fallback or Classic T-Shirt
+      const url = window.SHIRT_GLB || 'models/shirt.glb';
+      this.loadModelFromURL(url);
+    }
+
+    /* ================================================================
      *  STUDIO LIGHTING
      * ================================================================ */
     setupLighting() {
-      this.scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 0.8));
+      this.scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 0.85));
       
-      const dirLight = new THREE.DirectionalLight(0xffffff, 0.9);
+      const dirLight = new THREE.DirectionalLight(0xffffff, 0.95);
       dirLight.position.set(3, 10, 5);
       dirLight.castShadow = true;
       dirLight.shadow.mapSize.width = 1024;
       dirLight.shadow.mapSize.height = 1024;
       this.scene.add(dirLight);
 
-      const rimLight = new THREE.DirectionalLight(0x93c5fd, 0.6);
+      const fillLight = new THREE.DirectionalLight(0xe0f2fe, 0.45);
+      fillLight.position.set(-4, 3, 4);
+      this.scene.add(fillLight);
+
+      const rimLight = new THREE.DirectionalLight(0x93c5fd, 0.7);
       rimLight.position.set(-5, 5, -5);
       this.scene.add(rimLight);
 
