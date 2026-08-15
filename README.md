@@ -32,18 +32,29 @@ Operating **100% client-side**, the entire engine requires no backend server, da
   - Multi-zone typography engine with customizable fonts, sizes, colors, and positioning (Chest, Back, Collar, Sleeves, Pockets).
   - Drag-and-drop custom logo and sponsor artwork upload with real-time canvas composition.
 
+- 🚴 **High-Fidelity 3D Pro Cycling Jersey Engine**
+  - Bespoke procedural geometry builder ([`js/cycling_model.js`](js/cycling_model.js)) tailored for authentic cycling apparel.
+  - **Aerodynamic Race Cut:** Contoured chest, slim tapered waist, and drop-tail rear hem.
+  - **3D Triple Rear Cargo Pockets:** 3 physical cargo pocket compartments with volumetric depth and top elastic seam band on the lower back.
+  - **Aero Mandarin Zip Collar & Raglan Sleeves:** Standing collar with V-throat notch and extended mid-bicep aero sleeves with elastic cuffs.
+  - **3D Zipper Assembly:** Physical metallic/matte zipper track and pull tab.
+
 - 🌐 **Interactive 3D WebGL Studio**
-  - Powered by **Three.js** with orbit controls, 360° rotation, smooth zoom, and responsive panning.
-  - Studio-grade three-point lighting setup with subtle ambient highlights and soft shadows.
+  - Powered by **Three.js** with orbit controls, 360° rotation, smooth zoom, and responsive camera angle quick-snaps (Front, 3/4, Rear, Side).
+  - Studio-grade multi-point lighting setup with subtle ambient highlights and soft shadows.
   - Dynamic material properties tuned for realistic sportswear fabric rendering.
 
 - 📐 **Dynamic Dual-Hemisphere Planar UV Projection**
   - Automatically maps flat 2D SVG canvas designs onto 3D apparel geometries without requiring pre-baked UV unwrapping.
   - Computes world-space bounding boxes and dynamically projects front vertices ($Z > 0$) to the front texture coordinate space and back vertices ($Z \le 0$) with automatic horizontal mirror compensation.
 
-- 📦 **Custom 3D Model Ingestion (`.glb` / `.gltf`)**
+- 📦 **Model Switcher & Custom 3D Model Ingestion (`.glb` / `.gltf`)**
+  - Quick-toggle in the top toolbar between **Pro Aero Kit**, **Classic Tee**, and **Custom GLB Upload**.
   - Upload any standard 3D jersey, t-shirt, or mannequin model directly into the browser.
   - Automatic geometric normalization, origin re-centering, height scaling, and hanger accessory alignment.
+
+- 🏷️ **VELOX Minimalist Brand Assets**
+  - Integrated luxury minimal cycling brand identity ("VELOX APEX") with clean vector emblem and high-resolution typography badges.
 
 - 📄 **Manufacturing-Ready Tech Pack Generator**
   - Generates comprehensive 2D production blueprints with panel callouts, color codes, dimensions, and logo placements.
@@ -67,9 +78,15 @@ mini-jersey-studio/
 │   ├── app.js            # Main UI controller & DOM event coordinator
 │   ├── state.js          # Centralized Pub/Sub state management
 │   ├── renderer.js       # SVG-to-Canvas dynamic texture baking engine
+│   ├── cycling_model.js  # 3D Pro Cycling Jersey procedural geometry generator
 │   ├── three_viewer.js   # 3D WebGL scene, lighting & planar UV mapping
 │   ├── techpack.js       # 2D production blueprint & PDF exporter
+│   ├── geometry.js       # SVG paths & stock cycling symbols library
+│   ├── patterns.js       # Procedural SVG geometric patterns
 │   └── model_data.js     # Base64 embedded default 3D model (CORS-free)
+├── img/
+│   ├── velox_logo.jpg    # Ultra-modern minimal cycling brand logo
+│   └── velox_minimal_badge.jpg # Minimalist road cycling badge
 ├── .github/
 │   ├── workflows/        # GitHub Actions automated deployment
 │   └── ISSUE_TEMPLATE/   # Issue and Pull Request standards
@@ -81,11 +98,12 @@ mini-jersey-studio/
 
 | Module | Purpose |
 | :--- | :--- |
+| [`js/cycling_model.js`](js/cycling_model.js) | Procedural 3D Pro Cycling Jersey engine (aero race-fit torso, raglan sleeves, aero collar, 3D rear cargo pockets, zipper). |
 | [`js/state.js`](js/state.js) | Centralized state container. Dispatches update events to subscribers whenever colors, texts, logos, or patterns change. |
 | [`js/renderer.js`](js/renderer.js) | Injects reactive state into flat SVG sewing templates, rasterizing them onto a high-resolution $2048 \times 1024$ `<canvas>` via `XMLSerializer`. |
 | [`js/three_viewer.js`](js/three_viewer.js) | Manages Three.js scene graph, camera, studio lighting, materials, and executes Dynamic Planar UV coordinate reassignment. |
 | [`js/techpack.js`](js/techpack.js) | Compiles front/back panels, Pantone/HEX palettes, and sponsor zones into production-ready specification sheets. |
-| [`js/model_data.js`](js/model_data.js) | Contains the default 3D model encoded as a Data URI to bypass browser CORS restrictions when opened locally. |
+| [`js/model_data.js`](js/model_data.js) | Contains the classic 3D model encoded as a Data URI to bypass browser CORS restrictions when opened locally. |
 
 ---
 
