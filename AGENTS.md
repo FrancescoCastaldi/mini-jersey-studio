@@ -12,10 +12,10 @@ Core features include:
 - **Production Export (Tech Pack):** The app generates a manufacturing-ready "Tech Pack" — a flat 2D blueprint of the customized jersey that can be downloaded as an image or PDF for real-world printing and production.
 - **Project Save/Load:** Users can save their current design state to a `.jersey` JSON file and import it later to resume work.
 
-## 🌍 Language & Repository Standards (TODO)
-**CRITICAL RULE FOR FUTURE AGENTS:** 
-- **Repository Language:** If this project is pushed to a Git repository or further developed, the entire repository (code, comments, documentation, and commit messages) **MUST** be entirely in English.
-- **Site Localization:** The frontend UI of the application is currently in Italian. It **MUST be completely translated into English**. Any future modifications or additions to the UI text, alerts, or tooltips must be written directly in English.
+## 🌍 Language, Git & Repository Standards
+**CRITICAL RULES FOR FUTURE AGENTS:** 
+- **Repository Language:** The entire repository (code, comments, documentation, UI strings, and commit messages) **MUST** be entirely in English.
+- **Auto-Push Policy:** Every completed code, asset, or documentation modification **MUST** be immediately committed (using Conventional Commits) and pushed to remote `origin master`.
 
 ## 🏗️ Architecture Overview
 - **Tech Stack:** Vanilla HTML5, CSS3, JavaScript. No bundlers (Webpack/Vite), no frameworks (React/Vue), no backend server.
